@@ -37,4 +37,15 @@ public class CardGame {
         return deckOfCards;
     }
 
+    // TODO handle dealCard when the deck is empty, with exception
+    public Card dealCard() {
+        // check is the deck has card or not, if no card left, then draw the game, now only return null
+        // get one card from the end of the array, it is cheaper to get it from the end
+        // return it
+        // ToDO change to throw exception
+        if (deckOfCards.isEmpty()) {
+            return null;
+        }
+        return deckOfCards.remove(deckOfCards.size()-1);
+    }
 }
