@@ -16,10 +16,6 @@ public class CardGameTest {
         cardGame = new CardGame("Snap");
     }
 
-    // methodName_StateUnderTest_ExpectedBehaviour
-    // TODO get rid of the magic number 52?
-    // TODO fix capital letter
-
     // ===== @Test methods =====
     @Test
     void getDeck_WhenCalledAfterConstruction_Return52cards() {
@@ -40,11 +36,11 @@ public class CardGameTest {
         assertEquals(initialNumberOfCards - 1, cardGame.getDeck().size());
     }
 
-    // we only sort deck when it is full
-    // but need to deal when deck is empty, throw exception?
-    // we need to manually create a deck in a wrong order, use shuffle is ok, but shuffle has very low chance not shuffle
-    // create a helper function, so I can reuse it in sortDeckIntoSuits(), shuffleDeck()
-    // Sort deck by value first, then suit for consistent order
+    @Test
+    void dealCard_whenDeckIsEmpty_ThrowsIllegalStateException() {
+        cardGame.getDeck().clear();
+        assertThrows(IllegalStateException.class, () -> cardGame.dealCard());
+    }
 
     @Test
     void sortDeckInNumberOrder_whenDeckIsUnsortedAndFull_shouldSortCorrectly() {
@@ -65,6 +61,14 @@ public class CardGameTest {
     }
 
     @Test
+    void sortDeckInNumberOrder_whenDeckIsEmpty_ThrowsIllegalStateException() {
+        cardGame.getDeck().clear();
+        assertThrows(IllegalStateException.class, () ->
+                cardGame.sortDeckInNumberOrder()
+        );
+    }
+
+    @Test
     void sortDeckIntoSuits_whenDeckIsUnsortedAndFull_shouldSortCorrectly() {
         List<Card> deck = cardGame.getDeck();
         setupDeckInWrongOrder(deck);
@@ -81,6 +85,14 @@ public class CardGameTest {
 
         assertSameCard(Suit.Diamond, "2", 2, deck, 6);
         assertSameCard(Suit.Diamond, "6", 6, deck, 7);
+    }
+
+    @Test
+    void sortDeckIntoSuits_whenDeckIsEmpty_ThrowsIllegalStateException() {
+        cardGame.getDeck().clear();
+        assertThrows(IllegalStateException.class, () ->
+                cardGame.sortDeckIntoSuits()
+        );
     }
 
 

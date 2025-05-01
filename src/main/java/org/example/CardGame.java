@@ -28,8 +28,8 @@ public class CardGame {
     public static List<Card> generateDeck() {
         List<Card> deck = new ArrayList<>();
         for (Suit suit : Suit.values()) {
-            for (SymbolValue symbolANdValue : SYMBOLS_AND_VALUES) {
-                deck.add(new Card(suit, symbolANdValue.symbol(), symbolANdValue.value()));
+            for (SymbolValue symbolAndValue : SYMBOLS_AND_VALUES) {
+                deck.add(new Card(suit, symbolAndValue.symbol(), symbolAndValue.value()));
             }
         }
         return deck;
@@ -44,30 +44,23 @@ public class CardGame {
         return deckOfCards;
     }
 
-    // TODO handle dealCard when the deck is empty, with exception
     public Card dealCard() {
-        // check is the deck has card or not, if no card left, then draw the game, now only return null
-        // get one card from the end of the array, it is cheaper to get it from the end
-        // return it
-        // ToDO change to throw exception
         if (deckOfCards.isEmpty()) {
-            return null;
+            throw new IllegalStateException("Deck is empty, cannot deal card");
         }
         return deckOfCards.remove(deckOfCards.size() - 1);
     }
 
-
-    // TODO handle when the deck is empty, with exception
     public void sortDeckInNumberOrder() {
         if (deckOfCards.isEmpty()) {
-            return;
+            throw new IllegalStateException("Deck is empty, cannot sort");
         }
         deckOfCards.sort(CARD_VALUE_SUIT_COMPARATOR);
     }
 
     public void sortDeckIntoSuits() {
         if (deckOfCards.isEmpty()) {
-            return;
+            throw new IllegalStateException("Deck is empty, cannot sort");
         }
         deckOfCards.sort(CARD_SUIT_VALUE_COMPARATOR);
     }
