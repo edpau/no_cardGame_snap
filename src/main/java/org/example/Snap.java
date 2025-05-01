@@ -43,6 +43,24 @@ public class Snap extends CardGame {
         return previousCard.getSymbol().equals(currentCard.getSymbol());
     }
 
+    public void playGameLoop() {
+        while(true){
+            promptEnterKey();
+            this.currentCard = dealCard();
+            System.out.println("New Card is " + this.currentCard);
+            if(isSymbolMatch(this.getPreviousCard(), this.getCurrentCard())){
+                System.out.println("You win");
+                break;
+            } else if(this.getDeck().isEmpty()){
+                System.out.println("You loss");
+                break;
+            } else {
+                this.previousCard = this.currentCard;
+                System.out.println("You didn't win");
+            };
+        }
+    }
+
 
     // createNewGame(){}, start game, create the deck, shuffle the deck, return a card,
 
