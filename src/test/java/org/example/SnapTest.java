@@ -28,5 +28,22 @@ class SnapTest {
         assertFalse(snapGame.isSymbolMatch(card1, card2));
     }
 
+    @Test
+    void switchPlayer_playerOneIsCurrentPlayer_switchPlayerTwoToCurrentPlayer() {
+        assertEquals(0, snapGame.getCurrentPlayerIndex());
+        snapGame.switchPlayer();
+        assertEquals(1, snapGame.getCurrentPlayerIndex());
+    }
+
+    @Test
+    void switchPlayer_cycleThroughPlayers_returnsToPlayerOne() {
+        // test multiplayer in the future
+        assertEquals(0, snapGame.getCurrentPlayerIndex());
+        for(int i=0; i<snapGame.getPlayerList().size(); i++){
+            snapGame.switchPlayer();
+        }
+        assertEquals(0, snapGame.getCurrentPlayerIndex());
+    }
+
 
 }
