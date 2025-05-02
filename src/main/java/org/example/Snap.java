@@ -107,7 +107,6 @@ public class Snap extends CardGame {
             System.out.println("New Card is " + this.currentCard);
             if(isSymbolMatch(this.getPreviousCard(), this.getCurrentCard())){
                 handleSnapInput();
-                System.out.println("never come here");
                 break;
             } else if(this.getDeck().isEmpty()){
                 System.out.println("No card left, draw");
