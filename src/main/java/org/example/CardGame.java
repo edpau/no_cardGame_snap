@@ -5,13 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class CardGame {
-    private String name;
-    private List<Card> deckOfCards = new ArrayList<>();
-
-    public record SymbolValue(String symbol, int value) {
-    }
-
+public abstract class CardGame {
     public static final SymbolValue[] SYMBOLS_AND_VALUES = {
             new SymbolValue("2", 2), new SymbolValue("3", 3), new SymbolValue("4", 4),
             new SymbolValue("5", 5), new SymbolValue("6", 6), new SymbolValue("7", 7),
@@ -22,8 +16,11 @@ public class CardGame {
     private static final Comparator<Card> CARD_VALUE_SUIT_COMPARATOR = Comparator.comparingInt(Card::getValue).thenComparing(Comparator.comparing(Card::getSuit).reversed());
     private static final Comparator<Card> CARD_SUIT_VALUE_COMPARATOR = Comparator.comparing(Card::getSuit).thenComparingInt(Card::getValue);
 
+    private List<Card> deckOfCards = new ArrayList<>();
 
-    //
+    public CardGame(String name) {
+        this.deckOfCards = generateDeck();
+    }
 
     public static List<Card> generateDeck() {
         List<Card> deck = new ArrayList<>();
@@ -35,37 +32,35 @@ public class CardGame {
         return deck;
     }
 
-    public CardGame(String name) {
-        this.name = name;
-        this.deckOfCards = generateDeck();
-    }
-
-    public List<Card> getDeck() {
-        return deckOfCards;
-    }
-
-    public Card dealCard() {
+    protected Card dealCard() {
         if (deckOfCards.isEmpty()) {
             throw new IllegalStateException("Deck is empty, cannot deal card");
         }
         return deckOfCards.remove(deckOfCards.size() - 1);
     }
 
-    public void sortDeckInNumberOrder() {
+    protected void sortDeckInNumberOrder() {
         if (deckOfCards.isEmpty()) {
             throw new IllegalStateException("Deck is empty, cannot sort");
         }
         deckOfCards.sort(CARD_VALUE_SUIT_COMPARATOR);
     }
 
-    public void sortDeckIntoSuits() {
+    protected void sortDeckIntoSuits() {
         if (deckOfCards.isEmpty()) {
             throw new IllegalStateException("Deck is empty, cannot sort");
         }
         deckOfCards.sort(CARD_SUIT_VALUE_COMPARATOR);
     }
 
-    public void shuffleDeck() {
+    protected void shuffleDeck() {
         Collections.shuffle(deckOfCards);
+    }
+
+    protected List<Card> getDeck() {
+        return deckOfCards;
+    }
+
+    public record SymbolValue(String symbol, int value) {
     }
 }
