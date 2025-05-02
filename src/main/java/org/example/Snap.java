@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Snap extends CardGame {
@@ -68,47 +67,57 @@ public class Snap extends CardGame {
         this.currentPlayerIndex = (this.currentPlayerIndex + 1 ) % this.playerList.size();
     }
 
+    protected Player currentPlayer(){
+        return this.playerList.get(currentPlayerIndex);
+    }
+
+    protected void handleSnapInput() {
+        String currentPlayer = currentPlayer().getName();
+        System.out.println(currentPlayer + " snap opportunity, you have 2 sec to type snap to win the game");
+
+        Thread snapThread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    System.out.println("\n2 second passed");
+                } catch (InterruptedException e) {
+                    return;
+                }
+
+                System.out.println(currentPlayer +" Time's up! You loss.");
+                System.exit(0);
+            }
+        });
+
+        snapThread.start();
+
+            if(scanner.nextLine().equalsIgnoreCase("snap")){
+               System.out.println(currentPlayer + ", you win");
+            }  else {
+                System.out.println(currentPlayer + ", wrong word, you loss");
+            }
+                snapThread.interrupt();
+        }
+
     public void playGameLoop() {
         while(true){
-            promptEnterKey(this.playerList.get(currentPlayerIndex));
+            promptEnterKey(currentPlayer());
             this.currentCard = dealCard();
             System.out.println("New Card is " + this.currentCard);
             if(isSymbolMatch(this.getPreviousCard(), this.getCurrentCard())){
-                System.out.println(this.playerList.get(currentPlayerIndex).getName() + ", You win");
+                handleSnapInput();
+                System.out.println("never come here");
                 break;
             } else if(this.getDeck().isEmpty()){
-                System.out.println("Draw");
+                System.out.println("No card left, draw");
                 break;
             } else {
                 this.previousCard = this.currentCard;
-                System.out.println(this.playerList.get(currentPlayerIndex).getName() + ", didn't win");
+                System.out.println(currentPlayer().getName() + ", didn't win");
                 System.out.println("Card left in Deck " + this.getDeck().size());
                 switchPlayer();
             };
         }
     }
-
-
-    // createNewGame(){}, start game, create the deck, shuffle the deck, return a card,
-
-
-    // Stage 3
-
-    // next turn
-    // by pressing enter
-    // deal a card
-
-    // check win or not
-    // state to hold previous card
-    // check whether the current card and the previous card is the same or not
-
-    // Stage 4
-    // create a state to hold playingPlayer
-
-    // next turn function take a user. update the playerInPlay in Snap
-    // switch player
-
-    // check win or not
-    // print out which player win
-
 }
