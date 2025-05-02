@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class Snap extends CardGame {
     private static final Scanner scanner = new Scanner(System.in);
-    private Player playerOne;
-    private Player playerTwo;
+    private final Player playerOne;
+    private final Player playerTwo;
     private int currentPlayerIndex = 0;
-    private List<Player> playerList;
+    private final List<Player> playerList;
 
     private Card previousCard;
     private Card currentCard;
