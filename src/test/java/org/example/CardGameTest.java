@@ -3,17 +3,18 @@ package org.example;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CardGameTest {
+    private static final String GAME_NAME = "Game";
+
     private CardGame cardGame;
 
     @BeforeEach
     void setUp() {
-        cardGame = new CardGame("Snap");
+        cardGame = buildAnonymousCardGame();
     }
 
     // ===== @Test methods =====
@@ -116,4 +117,9 @@ public class CardGameTest {
         assertEquals(card.getValue(), deckCard.getValue());
         assertEquals(card.getSymbol(), deckCard.getSymbol());
     }
+
+private CardGame buildAnonymousCardGame() {
+        return new CardGame(CardGameTest.GAME_NAME){};
+}
+
 }
