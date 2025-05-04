@@ -10,8 +10,6 @@ import java.util.Scanner;
 public class Snap extends CardGame {
     private static final Scanner scanner = new Scanner(System.in);
 
-    private final Player playerOne;
-    private final Player playerTwo;
     private final List<Player> playerList;
 
     private int currentPlayerIndex = 0;
@@ -20,12 +18,7 @@ public class Snap extends CardGame {
 
     public Snap() {
         super("Snap");
-
-        // TODO make a function to create new player and list;
-        this.playerOne = new Player("Player One");
-        this.playerTwo = new Player("Player Two");
-        playerList = new ArrayList<>(List.of(playerOne, playerTwo));
-
+        this.playerList = createPlayers();
     }
 
     public static void promptEnterKey(Player currentPlayer) {
@@ -125,4 +118,9 @@ public class Snap extends CardGame {
         return playerList;
     }
 
+    private List<Player> createPlayers() {
+        Player playerOne = new Player("Player One");
+        Player playerTwo = new Player("Player Two");
+        return new ArrayList<>(List.of(playerOne, playerTwo));
+    }
 }
