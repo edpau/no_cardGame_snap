@@ -47,7 +47,7 @@ cd no_cardGame_snap
 
 3. Compile the project
 ```
-javac -d out src/main/java/org/example/Main.java
+javac -d out $(find src/main/java -name "*.java")
 ```
 
 4. Run the game
