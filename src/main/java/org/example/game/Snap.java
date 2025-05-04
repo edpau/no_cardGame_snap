@@ -35,12 +35,12 @@ public class Snap extends CardGame {
         while (true) {
             promptEnterKey(currentPlayer());
             this.currentCard = dealCard();
-            System.out.println(currentPlayer().getName() + " draws:" + this.currentCard);
+            System.out.println(currentPlayer().getName() + " draws: " + this.currentCard);
             if (isSymbolMatch(this.getPreviousCard(), this.getCurrentCard())) {
                 handleSnapInput();
                 break;
             } else if (this.getDeck().isEmpty()) {
-                System.out.println("No card left, draw");
+                System.out.println("The deck is empty. It's a draw! Game end");
                 break;
             } else {
                 this.previousCard = this.currentCard;
@@ -88,16 +88,16 @@ public class Snap extends CardGame {
                 return;
             }
 
-            System.out.println(currentPlayer + ", you missed your chance. You lose. Game End");
+            System.out.println(currentPlayer + ", you missed your chance. You lose. Game end");
             System.exit(0);
         });
 
         snapThread.start();
 
         if (scanner.nextLine().equalsIgnoreCase("snap")) {
-            System.out.println(currentPlayer + ", you win. Game End");
+            System.out.println(currentPlayer + ", you win. Game end");
         } else {
-            System.out.println(currentPlayer + ", incorrect input. You lose the game. Game End");
+            System.out.println(currentPlayer + ", incorrect input. You lose the game. Game end");
         }
         snapThread.interrupt();
     }
