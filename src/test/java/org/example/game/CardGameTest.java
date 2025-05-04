@@ -1,5 +1,7 @@
-package org.example;
+package org.example.game;
 
+import org.example.Card;
+import org.example.Suit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
