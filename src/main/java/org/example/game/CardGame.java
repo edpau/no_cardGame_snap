@@ -2,19 +2,16 @@ package org.example.game;
 
 import org.example.card.Card;
 import org.example.card.Suit;
+import org.example.card.SymbolValue;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static org.example.card.SymbolValue.SYMBOLS_AND_VALUES;
+
 public abstract class CardGame {
-    public static final SymbolValue[] SYMBOLS_AND_VALUES = {
-            new SymbolValue("2", 2), new SymbolValue("3", 3), new SymbolValue("4", 4),
-            new SymbolValue("5", 5), new SymbolValue("6", 6), new SymbolValue("7", 7),
-            new SymbolValue("8", 8), new SymbolValue("9", 9), new SymbolValue("10", 10),
-            new SymbolValue("J", 11), new SymbolValue("Q", 12), new SymbolValue("K", 13),
-            new SymbolValue("A", 14)};
 
     private static final Comparator<Card> CARD_VALUE_SUIT_COMPARATOR = Comparator.comparingInt(Card::getValue).thenComparing(Comparator.comparing(Card::getSuit).reversed());
     private static final Comparator<Card> CARD_SUIT_VALUE_COMPARATOR = Comparator.comparing(Card::getSuit).thenComparingInt(Card::getValue);
@@ -62,8 +59,5 @@ public abstract class CardGame {
 
     protected List<Card> getDeck() {
         return deckOfCards;
-    }
-
-    public record SymbolValue(String symbol, int value) {
     }
 }
