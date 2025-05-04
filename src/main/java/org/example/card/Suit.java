@@ -1,4 +1,4 @@
-package org.example;
+package org.example.card;
 
 public enum Suit {
     Spade("♠"), Heart("♥"), Club("♣"), Diamond("♦");

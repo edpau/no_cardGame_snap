@@ -1,6 +1,6 @@
 package org.example.game;
 
-import org.example.Card;
+import org.example.card.Card;
 import org.example.player.Player;
 
 import java.util.ArrayList;

@@ -1,9 +1,16 @@
-package org.example;
+package org.example.card;
+
+import org.example.game.Snap;
 
 public class Main {
     public static void main(String[] args) {
-        CardGame deck = new CardGame("deck");
 
-        System.out.println(deck.getDeck());
+        Snap game = new Snap();
+
+        game.createNewGame();
+
+        game.playGameLoop();
+
+
     }
 }

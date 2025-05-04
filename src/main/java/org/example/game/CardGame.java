@@ -1,7 +1,7 @@
 package org.example.game;
 
-import org.example.Card;
-import org.example.Suit;
+import org.example.card.Card;
+import org.example.card.Suit;
 
 import java.util.ArrayList;
 import java.util.Collections;

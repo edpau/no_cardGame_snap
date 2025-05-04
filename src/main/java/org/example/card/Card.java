@@ -1,4 +1,4 @@
-package org.example;
+package org.example.card;
 
 public class Card {
     private Suit suit;
